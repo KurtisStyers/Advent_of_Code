@@ -9,5 +9,6 @@ public class Main {
         // System.out.println("Day 1 Part 2:");
         // Day1_Part2.getCals();
         Day2_Part1.getWins();
+        Day2_Part2.getWins();
     }
 }

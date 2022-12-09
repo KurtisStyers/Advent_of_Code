@@ -44,7 +44,7 @@ public class Day2_Part1 {
      * @param hands an array that holds each players hand. rock: 3, paper: 2, scissors: 1
      * @return      the points for the outcome of the game. win: 6, draw: 3, lose: 0
      */
-    private static int getWinPoints(int[] hands) {
+    public static int getWinPoints(int[] hands) {
         // draw
         if (hands[0] == hands[1]) {
             return 3;
