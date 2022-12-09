@@ -4,32 +4,31 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 public class Day2_Part1 {
-    //first column: A) rock  B) paper  C) scissors
-    //second column: X) rock  Y) paper  Z) scissors
-    //score for each round is score for shape plus outcome
-    // points: rock 1  paper 2  scissors 3
-    // points for outcome: loss 0  draw 3  win 6
 
+    
+    /**
+     * Reads through a file containing the hands from a rock-paper-scissors game 
+     * and calculates the users points
+     */
     public static void getWins() {
         try {
             File file = new File("day2/rockpaperscissors.txt");
             Scanner reader = new Scanner(file);
             String enemyChoice = "";
             String userChoice = "";
-            int[] points = new int[2];
+            int[] hands = new int[2];
             int totalPoints = 0;
 
-            // loop through input
             while (reader.hasNext()) {
                 enemyChoice = reader.next();
                 userChoice = reader.next();
 
                 // get points for choice
-                points = getHandPoints(userChoice, enemyChoice);
-                totalPoints += points[0];
+                hands = getHandPoints(userChoice, enemyChoice);
+                totalPoints += hands[0];
 
                 // check for win and add points for outcome 
-                totalPoints += getWinPoints(points);               
+                totalPoints += getWinPoints(hands);               
             }
             reader.close();
             System.out.printf("Total Points: %d\n", totalPoints);
@@ -40,13 +39,18 @@ public class Day2_Part1 {
         }
     }
 
-    private static int getWinPoints(int[] points) {
+    /**
+     * Returns the points from the outcome of a rock-paper-scissors game.
+     * @param hands an array that holds each players hand. rock: 3, paper: 2, scissors: 1
+     * @return      the points for the outcome of the game. win: 6, draw: 3, lose: 0
+     */
+    private static int getWinPoints(int[] hands) {
         // draw
-        if (points[0] == points[1]) {
+        if (hands[0] == hands[1]) {
             return 3;
         }
         //win: (rock vs scissors) || (paper vs rock) || (scissors vs paper)
-        else if ((points[0] == 1 && points[1] == 3) || (points[0] == 2 && points[1] == 1) || (points[0] == 3 && points[1] == 2)) {
+        else if ((hands[0] == 1 && hands[1] == 3) || (hands[0] == 2 && hands[1] == 1) || (hands[0] == 3 && hands[1] == 2)) {
             return 6;
         }
         else {
@@ -55,9 +59,15 @@ public class Day2_Part1 {
         
     }
 
+    /**
+     * Returns the numerical value for the hand played in rock-paper-scissors
+     * @param userChoice the hand played by the user. X: rock, Y: paper, Z: scissors
+     * @param enemyChoice the hand played by the opponent. A: rock, B: paper, C: scissors
+     * @return an array holding the point values of the user hand and the opponent hand
+     */
     private static int[] getHandPoints(String userChoice, String enemyChoice) {
         int[] points = {0, 0};
-
+        
         switch (userChoice) {
             case "X": 
                 points[0] = 1;
