@@ -85,7 +85,6 @@ public class Day2_Part1 {
             default:
                 points [1]= 0;
         }
-        System.out.println(points[0]);
 
         return points;
     }
